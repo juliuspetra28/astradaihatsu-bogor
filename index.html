@@ -17,11 +17,15 @@
                         'brand-red': '#e1001a',
                         'brand-red-dark': '#b80015',
                         'brand-dark': '#0f172a',
+                        'brand-dark-card': '#1e293b',
                         'brand-accent': '#f59e0b',
+                        'brand-surface': '#f8fafc',
                     },
                     boxShadow: {
-                        'glow': '0 0 25px -5px rgba(225, 0, 26, 0.4)',
-                        'card-hover': '0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04)',
+                        'glow-red': '0 10px 25px -5px rgba(225, 0, 26, 0.25)',
+                        'glow-emerald': '0 10px 25px -5px rgba(16, 185, 129, 0.3)',
+                        'card': '0 4px 20px -2px rgba(15, 23, 42, 0.05)',
+                        'card-hover': '0 20px 30px -10px rgba(15, 23, 42, 0.12)',
                     }
                 }
             }
@@ -31,20 +35,22 @@
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8fafc;
         }
 
-        /* Style Indikator Navigation Bar */
+        /* Nav Link Active & Hover Indicator */
         .nav-link {
             position: relative;
             padding-bottom: 4px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.25s ease;
         }
 
         .nav-link::after {
@@ -62,31 +68,45 @@
 
         .nav-link.active {
             color: #e1001a;
-            font-weight: 600;
+            font-weight: 700;
         }
 
         .nav-link.active::after {
             width: 100%;
         }
+
+        /* Glassmorphism subtle effects */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
     </style>
 </head>
 
-<body class="bg-slate-50 text-slate-800 antialiased selection:bg-brand-red selection:text-white">
+<body class="text-slate-800 antialiased selection:bg-red-500 selection:text-white">
 
     <!-- TOP HEADER -->
     <div class="bg-brand-dark text-slate-300 text-xs sm:text-sm py-2.5 border-b border-slate-800/80">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center flex-wrap gap-2">
-            <div class="flex items-center gap-4 text-xs sm:text-sm font-medium">
-                <span class="flex items-center hover:text-white transition"><i
-                        class="fa-solid fa-phone text-brand-red mr-2"></i> 0812-3456-789</span>
-                <span class="hidden sm:flex items-center hover:text-white transition"><i
-                        class="fa-solid fa-location-dot text-brand-red mr-2"></i> Dealer Resmi Daihatsu Jakarta</span>
+            <div class="flex items-center gap-4 sm:gap-6 text-xs sm:text-sm font-medium">
+                <span class="flex items-center gap-2 hover:text-white transition">
+                    <i class="fa-solid fa-phone text-brand-red text-xs"></i> 0812-3456-789
+                </span>
+                <span class="flex items-center gap-2 hover:text-white transition">
+                    <i class="fa-solid fa-location-dot text-brand-red text-xs"></i> Dealer Resmi Daihatsu Jakarta
+                </span>
             </div>
-            <div
-                class="text-xs sm:text-sm font-semibold text-emerald-400 bg-emerald-950/40 border border-emerald-500/20 px-3 py-1 rounded-full flex items-center gap-2">
+            <div class="text-xs sm:text-sm font-semibold text-emerald-400 flex items-center gap-2 bg-emerald-950/40 px-3 py-1 rounded-full border border-emerald-800/40">
                 <span class="relative flex h-2 w-2">
-                    <span
-                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                     <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                 </span>
                 Online 24/7 - Respon Cepat
@@ -95,48 +115,44 @@
     </div>
 
     <!-- NAVBAR -->
-    <nav
-        class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-100 transition-all duration-300">
+    <nav class="sticky top-0 z-50 glass-nav shadow-sm border-b border-slate-200/60 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-20 items-center">
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
                     <a href="#beranda" class="flex items-center group">
                         <img src="assets/logo-daihatsu.png" alt="Daihatsu Sales Logo"
-                            class="h-50 sm:h-50 w-auto object-contain transition duration-300 group-hover:scale-105"
+                            class="h-50 sm:h-50 w-auto object-contain transition transform group-hover:scale-105"
                             onerror="this.src='https://placehold.co/180x40/e1001a/ffffff?text=DAIHATSU.SALES'">
                     </a>
                 </div>
 
                 <!-- Desktop / Laptop Menu (lg+) -->
-                <div class="hidden lg:flex items-center space-x-6 xl:space-x-8 font-medium">
+                <div class="hidden lg:flex items-center space-x-7 xl:space-x-9 font-semibold text-sm">
                     <a href="#beranda"
-                        class="nav-link active text-slate-600 hover:text-brand-red text-sm xl:text-base">Beranda</a>
-                    <a href="#profile" class="nav-link text-slate-600 hover:text-brand-red text-sm xl:text-base">Profile
-                        Sales</a>
+                        class="nav-link active text-slate-600 hover:text-brand-red transition">Beranda</a>
+                    <a href="#profile" class="nav-link text-slate-600 hover:text-brand-red transition">Profile Sales</a>
                     <a href="#keunggulan"
-                        class="nav-link text-slate-600 hover:text-brand-red text-sm xl:text-base">Keunggulan</a>
-                    <a href="#katalog" class="nav-link text-slate-600 hover:text-brand-red text-sm xl:text-base">Katalog
-                        Mobil</a>
+                        class="nav-link text-slate-600 hover:text-brand-red transition">Keunggulan</a>
+                    <a href="#katalog" class="nav-link text-slate-600 hover:text-brand-red transition">Katalog Mobil</a>
                     <a href="#brosur"
-                        class="nav-link text-slate-600 hover:text-brand-red text-sm xl:text-base">E-Brosur</a>
+                        class="nav-link text-slate-600 hover:text-brand-red transition">E-Brosur</a>
                     <a href="#testimoni"
-                        class="nav-link text-slate-600 hover:text-brand-red text-sm xl:text-base">Testimoni</a>
+                        class="nav-link text-slate-600 hover:text-brand-red transition">Testimoni</a>
                 </div>
 
                 <!-- CTA Button Desktop (lg+) -->
                 <div class="hidden lg:flex items-center">
                     <a href="https://wa.me/628123456789?text=Halo%20Sales%20Daihatsu,%20saya%20ingin%20tanya%20promo%20terbaru"
                         target="_blank"
-                        class="bg-brand-red hover:bg-brand-red-dark text-white font-semibold px-5 py-2.5 text-sm xl:text-base rounded-full shadow-md hover:shadow-glow transition-all duration-300 flex items-center gap-2 transform hover:-translate-y-0.5">
+                        class="bg-brand-red hover:bg-brand-red-dark text-white font-bold px-5 py-2.5 rounded-full shadow-glow-red hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 flex items-center gap-2.5 text-sm">
                         <i class="fa-brands fa-whatsapp text-lg"></i> Hubungi Sales
                     </a>
                 </div>
 
                 <!-- Mobile & Tablet Menu Button (< lg) -->
                 <div class="lg:hidden flex items-center">
-                    <button id="mobile-menu-btn"
-                        class="text-slate-700 hover:text-brand-red focus:outline-none p-2 transition">
+                    <button id="mobile-menu-btn" class="text-slate-700 hover:text-brand-red focus:outline-none p-2 rounded-lg hover:bg-slate-100 transition">
                         <i id="mobile-menu-icon" class="fa-solid fa-bars text-2xl"></i>
                     </button>
                 </div>
@@ -145,84 +161,73 @@
 
         <!-- Mobile & Tablet Menu Dropdown -->
         <div id="mobile-menu"
-            class="hidden lg:hidden bg-white border-t border-slate-100 shadow-xl px-6 pt-3 pb-6 space-y-2">
+            class="hidden lg:hidden bg-white/95 backdrop-blur-xl border-b border-slate-200 shadow-xl px-6 pt-3 pb-6 space-y-2">
             <a href="#beranda"
-                class="mobile-nav-link block px-4 py-2.5 rounded-xl hover:bg-red-50 text-slate-700 hover:text-brand-red font-medium transition">Beranda</a>
+                class="mobile-nav-link block px-4 py-2.5 rounded-xl hover:bg-red-50 text-slate-700 hover:text-brand-red font-semibold transition">Beranda</a>
             <a href="#profile"
-                class="mobile-nav-link block px-4 py-2.5 rounded-xl hover:bg-red-50 text-slate-700 hover:text-brand-red font-medium transition">Profile
-                Sales</a>
+                class="mobile-nav-link block px-4 py-2.5 rounded-xl hover:bg-red-50 text-slate-700 hover:text-brand-red font-semibold transition">Profile Sales</a>
             <a href="#keunggulan"
-                class="mobile-nav-link block px-4 py-2.5 rounded-xl hover:bg-red-50 text-slate-700 hover:text-brand-red font-medium transition">Keunggulan</a>
+                class="mobile-nav-link block px-4 py-2.5 rounded-xl hover:bg-red-50 text-slate-700 hover:text-brand-red font-semibold transition">Keunggulan</a>
             <a href="#katalog"
-                class="mobile-nav-link block px-4 py-2.5 rounded-xl hover:bg-red-50 text-slate-700 hover:text-brand-red font-medium transition">Katalog
-                Mobil</a>
+                class="mobile-nav-link block px-4 py-2.5 rounded-xl hover:bg-red-50 text-slate-700 hover:text-brand-red font-semibold transition">Katalog Mobil</a>
             <a href="#brosur"
-                class="mobile-nav-link block px-4 py-2.5 rounded-xl hover:bg-red-50 text-slate-700 hover:text-brand-red font-medium transition">E-Brosur</a>
+                class="mobile-nav-link block px-4 py-2.5 rounded-xl hover:bg-red-50 text-slate-700 hover:text-brand-red font-semibold transition">E-Brosur</a>
             <a href="#testimoni"
-                class="mobile-nav-link block px-4 py-2.5 rounded-xl hover:bg-red-50 text-slate-700 hover:text-brand-red font-medium transition">Testimoni</a>
+                class="mobile-nav-link block px-4 py-2.5 rounded-xl hover:bg-red-50 text-slate-700 hover:text-brand-red font-semibold transition">Testimoni</a>
             <a href="https://wa.me/628123456789?text=Halo%20Sales%20Daihatsu,%20saya%20ingin%20tanya%20promo%20terbaru"
                 target="_blank"
-                class="block text-center bg-brand-red text-white font-semibold px-4 py-3 rounded-xl mt-4 shadow-lg hover:bg-brand-red-dark transition">
+                class="block text-center bg-brand-red hover:bg-brand-red-dark text-white font-bold px-4 py-3 rounded-xl shadow-glow-red mt-4 transition">
                 <i class="fa-brands fa-whatsapp mr-2 text-lg"></i> Hubungi Sales
             </a>
         </div>
     </nav>
 
     <!-- HERO / BERANDA SECTION -->
-    <section id="beranda" class="relative bg-slate-900 text-white py-16 md:py-24 lg:py-28 overflow-hidden scroll-mt-20">
-        <!-- Ambient Decorative Lighting -->
-        <div class="absolute -top-24 -left-24 w-96 h-96 bg-brand-red/25 rounded-full blur-3xl pointer-events-none">
-        </div>
-        <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-amber-500/15 rounded-full blur-3xl pointer-events-none">
-        </div>
+    <section id="beranda"
+        class="relative bg-gradient-to-b from-brand-dark via-slate-900 to-slate-900 text-white py-16 md:py-24 lg:py-32 overflow-hidden scroll-mt-20">
+        <!-- Ambient Background Radial Glow -->
+        <div class="absolute top-0 right-1/4 w-96 h-96 bg-brand-red/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-0 left-10 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+                <div class="lg:col-span-7 text-center lg:text-left">
                     <span
-                        class="inline-flex items-center gap-2 bg-gradient-to-r from-brand-red/30 to-amber-500/20 text-red-300 text-xs sm:text-sm font-semibold px-4 py-1.5 rounded-full border border-brand-red/40 backdrop-blur-sm">
-                        <i class="fa-solid fa-fire text-brand-red animate-bounce"></i> PROMO SPESIAL DAIHATSU 2026
+                        class="inline-flex items-center gap-2 bg-brand-red/10 text-red-400 text-xs sm:text-sm font-bold px-4 py-2 rounded-full mb-6 border border-brand-red/30 shadow-inner">
+                        <span class="flex h-2 w-2 rounded-full bg-brand-red animate-ping"></span>
+                        🔥 PROMO SPESIAL DAIHATSU 2026
                     </span>
-                    <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight">
-                        Dapatkan Mobil Daihatsu Impian dengan <span
-                            class="text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-rose-500 to-amber-400">DP
-                            & Angsuran Ringan!</span>
+                    <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight sm:leading-none mb-6">
+                        Dapatkan Mobil Daihatsu Impian dengan <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-rose-400 to-amber-400">DP & Angsuran Ringan!</span>
                     </h1>
-                    <p
-                        class="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
-                        Proses cepat, berkas dibantu sampai approved, menerima Trade-In (tukar tambah) semua merk dengan
-                        harga tertinggi.
+                    <p class="text-slate-300 text-base sm:text-lg lg:text-xl mb-10 font-normal max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        Proses cepat, berkas dibantu sampai approved, menerima Trade-In (tukar tambah) semua merk dengan harga tertinggi.
                     </p>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2">
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                         <a href="https://wa.me/628123456789?text=Halo%20Sales,%20saya%20ingin%20minta%20simulasi%20kredit%20mobil%20Daihatsu"
                             target="_blank"
-                            class="bg-brand-red hover:bg-brand-red-dark text-white font-semibold px-7 py-4 rounded-xl shadow-glow text-center transition-all duration-300 flex items-center justify-center gap-3 transform hover:-translate-y-1">
+                            class="bg-brand-red hover:bg-brand-red-dark text-white font-bold px-8 py-4 rounded-xl shadow-glow-red hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center gap-3 text-base">
                             <i class="fa-brands fa-whatsapp text-2xl"></i> Minta Simulasi Kredit
                         </a>
                         <a href="#katalog"
-                            class="bg-white/10 hover:bg-white/20 text-white font-semibold px-7 py-4 rounded-xl text-center transition-all duration-300 backdrop-blur-md border border-white/20 hover:border-white/40 transform hover:-translate-y-1">
+                            class="border border-slate-700 hover:border-slate-500 bg-slate-800/50 hover:bg-slate-800 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 text-center text-base backdrop-blur-sm">
                             Lihat Katalog
                         </a>
                     </div>
                 </div>
+
                 <div class="lg:col-span-5 relative">
-                    <div
-                        class="bg-gradient-to-b from-white/15 to-white/5 backdrop-blur-xl rounded-3xl p-4 sm:p-5 border border-white/20 shadow-2xl relative">
-                        <div class="overflow-hidden rounded-2xl relative group">
-                            <img src="assets/rocky.jpg" alt="Daihatsu Rocky"
-                                class="w-full h-auto object-cover rounded-2xl transition duration-500 group-hover:scale-105"
-                                onerror="this.src='https://placehold.co/600x400/e1001a/ffffff?text=Daihatsu+Rocky'">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent">
-                            </div>
-                        </div>
-                        <div
-                            class="mt-4 bg-slate-900/90 backdrop-blur-md text-white rounded-2xl p-4 border border-white/10 flex justify-between items-center shadow-lg">
+                    <div class="glass-panel rounded-3xl p-4 sm:p-5 shadow-2xl relative overflow-hidden group">
+                        <div class="absolute -top-24 -right-24 w-48 h-48 bg-brand-red/30 rounded-full blur-2xl"></div>
+                        <img src="assets/rocky.jpg" alt="Daihatsu Rocky"
+                            class="w-full h-auto object-cover rounded-2xl shadow-lg transition duration-500 group-hover:scale-[1.02]"
+                            onerror="this.src='https://placehold.co/600x400/e1001a/ffffff?text=Daihatsu+Rocky'">
+                        <div class="mt-4 bg-slate-900/90 border border-slate-800 text-white rounded-xl p-4 flex justify-between items-center backdrop-blur-md">
                             <div>
-                                <h3 class="font-bold text-base sm:text-lg">Daihatsu Rocky</h3>
+                                <h3 class="font-bold text-base sm:text-lg text-white">Daihatsu Rocky</h3>
                                 <p class="text-xs sm:text-sm text-slate-400">Compact SUV Modern & Sporty</p>
                             </div>
-                            <span
-                                class="bg-brand-red/90 text-white font-bold text-xs sm:text-sm px-3.5 py-1.5 rounded-full shadow-sm">
+                            <span class="bg-gradient-to-r from-red-500/20 to-brand-red/30 text-red-400 border border-red-500/30 font-bold text-xs sm:text-sm px-3.5 py-1.5 rounded-full">
                                 DP Mulai 10Jtn
                             </span>
                         </div>
@@ -233,26 +238,23 @@
     </section>
 
     <!-- PROFILE SALES SECTION -->
-    <section id="profile" class="py-16 md:py-24 bg-slate-100 scroll-mt-20">
+    <section id="profile" class="py-16 md:py-24 bg-slate-100/70 scroll-mt-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div
-                class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-3xl overflow-hidden shadow-2xl text-white border border-slate-700/50 relative">
-                <!-- Background Accent Glow -->
-                <div class="absolute top-0 right-0 w-80 h-80 bg-brand-red/10 rounded-full blur-3xl pointer-events-none">
-                </div>
+            <div class="bg-brand-dark rounded-3xl overflow-hidden shadow-2xl border border-slate-800 text-white relative">
+                <!-- Background decorative glow -->
+                <div class="absolute top-0 right-0 w-80 h-80 bg-brand-red/10 rounded-full blur-3xl pointer-events-none"></div>
 
-                <div
-                    class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center p-6 sm:p-10 lg:p-14 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center p-6 sm:p-10 lg:p-14 relative z-10">
 
                     <!-- Foto Sales -->
                     <div class="lg:col-span-5 flex justify-center">
                         <div class="relative group w-full max-w-xs sm:max-w-sm">
                             <div
-                                class="absolute -inset-1.5 bg-gradient-to-r from-brand-red to-brand-accent rounded-3xl blur opacity-70 group-hover:opacity-100 transition duration-700">
+                                class="absolute -inset-1 bg-gradient-to-r from-brand-red via-amber-500 to-brand-red rounded-2xl blur opacity-60 group-hover:opacity-100 transition duration-700">
                             </div>
                             <img src="assets/sales-profile.jpg" alt="Profile Sales Executive Daihatsu"
-                                class="relative rounded-2xl w-full h-80 sm:h-96 object-cover shadow-2xl border-2 border-white/20"
-                                onerror="this.src='https://placehold.co/400x500/111827/ffffff?text=Foto+Sales+Anda'">
+                                class="relative rounded-2xl w-full h-80 sm:h-96 object-cover shadow-2xl border border-white/20"
+                                onerror="this.src='https://placehold.co/400x500/0f172a/ffffff?text=Foto+Sales+Anda'">
                         </div>
                     </div>
 
@@ -260,14 +262,14 @@
                     <div class="lg:col-span-7 space-y-6">
                         <div>
                             <span
-                                class="inline-block bg-brand-red/90 text-white text-xs font-bold px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-3 shadow-sm border border-brand-red/50">
+                                class="inline-block bg-brand-red/20 text-red-400 border border-brand-red/30 text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider mb-3">
                                 Official Sales Executive
                             </span>
-                            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+                            <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
                                 Nama Sales Anda
                             </h2>
-                            <p class="text-brand-accent font-semibold mt-1.5 text-base sm:text-lg">
-                                Senior Sales Consultant - Dealer Resmi Daihatsu Jakarta
+                            <p class="text-amber-400 font-semibold mt-1 text-sm sm:text-base flex items-center gap-2">
+                                <i class="fa-solid fa-award"></i> Senior Sales Consultant - Dealer Resmi Daihatsu Jakarta
                             </p>
                         </div>
 
@@ -278,44 +280,43 @@
                         </p>
 
                         <!-- Highlights Stat -->
-                        <div class="grid grid-cols-3 gap-3 sm:gap-6 border-y border-slate-700/80 py-5 my-2">
+                        <div class="grid grid-cols-3 gap-4 pt-4 border-y border-slate-800 py-6">
                             <div class="text-center sm:text-left">
-                                <h4 class="text-2xl sm:text-3xl font-extrabold text-white">5+</h4>
-                                <p class="text-xs sm:text-sm text-slate-400 mt-1 font-medium">Tahun Pengalaman</p>
+                                <h4 class="text-2xl sm:text-3xl lg:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-300">5+</h4>
+                                <p class="text-xs sm:text-sm text-slate-400 font-medium mt-1">Tahun Pengalaman</p>
                             </div>
                             <div class="text-center sm:text-left">
-                                <h4 class="text-2xl sm:text-3xl font-extrabold text-white">1.000+</h4>
-                                <p class="text-xs sm:text-sm text-slate-400 mt-1 font-medium">Unit Terjual</p>
+                                <h4 class="text-2xl sm:text-3xl lg:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-300">1.000+</h4>
+                                <p class="text-xs sm:text-sm text-slate-400 font-medium mt-1">Unit Terjual</p>
                             </div>
                             <div class="text-center sm:text-left">
-                                <h4 class="text-2xl sm:text-3xl font-extrabold text-white">100%</h4>
-                                <p class="text-xs sm:text-sm text-slate-400 mt-1 font-medium">Kepuasan Pelanggan</p>
+                                <h4 class="text-2xl sm:text-3xl lg:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-300">100%</h4>
+                                <p class="text-xs sm:text-sm text-slate-400 font-medium mt-1">Kepuasan Pelanggan</p>
                             </div>
                         </div>
 
                         <!-- Contact List & CTA -->
-                        <div class="space-y-4">
-                            <div class="flex flex-wrap gap-4 text-xs sm:text-sm text-slate-300 font-medium">
-                                <span
-                                    class="flex items-center gap-2 bg-slate-800/80 px-3 py-1.5 rounded-lg border border-slate-700"><i
-                                        class="fa-solid fa-phone text-brand-red"></i> 0812-3456-789</span>
-                                <span
-                                    class="flex items-center gap-2 bg-slate-800/80 px-3 py-1.5 rounded-lg border border-slate-700"><i
-                                        class="fa-brands fa-whatsapp text-emerald-400"></i> 0812-3456-789</span>
-                                <span
-                                    class="flex items-center gap-2 bg-slate-800/80 px-3 py-1.5 rounded-lg border border-slate-700"><i
-                                        class="fa-solid fa-envelope text-brand-accent"></i>
-                                    sales@daihatsu-promo.com</span>
+                        <div class="space-y-4 pt-2">
+                            <div class="flex flex-wrap gap-4 sm:gap-6 text-xs sm:text-sm text-slate-300 font-medium">
+                                <span class="flex items-center gap-2 bg-slate-800/80 px-3.5 py-2 rounded-lg border border-slate-700">
+                                    <i class="fa-solid fa-phone text-brand-red"></i> 0812-3456-789
+                                </span>
+                                <span class="flex items-center gap-2 bg-slate-800/80 px-3.5 py-2 rounded-lg border border-slate-700">
+                                    <i class="fa-brands fa-whatsapp text-emerald-400"></i> 0812-3456-789
+                                </span>
+                                <span class="flex items-center gap-2 bg-slate-800/80 px-3.5 py-2 rounded-lg border border-slate-700">
+                                    <i class="fa-solid fa-envelope text-amber-400"></i> sales@daihatsu-promo.com
+                                </span>
                             </div>
 
                             <div class="flex flex-col sm:flex-row gap-4 pt-2">
                                 <a href="https://wa.me/628123456789?text=Halo%20Sales%20Daihatsu,%20saya%20ingin%20konsultasi%20pembelian%20mobil"
                                     target="_blank"
-                                    class="bg-emerald-500 hover:bg-emerald-600 text-white font-semibold px-6 py-3.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-2.5 shadow-lg text-sm sm:text-base transform hover:-translate-y-0.5">
+                                    class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-6 py-3.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-2.5 shadow-glow-emerald text-sm sm:text-base">
                                     <i class="fa-brands fa-whatsapp text-xl"></i> Chat WhatsApp
                                 </a>
                                 <a href="tel:08123456789"
-                                    class="bg-white/10 hover:bg-white/20 text-white font-semibold px-6 py-3.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-2.5 border border-white/20 text-sm sm:text-base backdrop-blur-sm transform hover:-translate-y-0.5">
+                                    class="bg-slate-800 hover:bg-slate-700 text-white font-semibold px-6 py-3.5 rounded-xl transition duration-300 flex items-center justify-center gap-2.5 border border-slate-700 text-sm sm:text-base">
                                     <i class="fa-solid fa-phone text-lg"></i> Telepon Langsung
                                 </a>
                             </div>
@@ -330,104 +331,85 @@
     <!-- KEUNGGULAN SECTION -->
     <section id="keunggulan" class="py-16 md:py-24 bg-white scroll-mt-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-2xl mx-auto mb-12">
-                <span
-                    class="text-brand-red font-bold text-xs sm:text-sm uppercase tracking-widest bg-red-50 px-3.5 py-1 rounded-full border border-red-100">Pelayanan
-                    Terbaik</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3">Mengapa Pembelian Harus Di Sini?
-                </h2>
-                <p class="text-slate-600 text-base mt-2">Layanan terbaik, jujur, transparan, dan terpercaya
-                    untuk Anda.</p>
+            <div class="text-center max-w-2xl mx-auto mb-12 md:mb-16">
+                <span class="text-brand-red font-bold text-xs sm:text-sm uppercase tracking-widest block mb-2">Mengapa Memilih Kami</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Mengapa Pembelian Harus Di Sini?</h2>
+                <p class="text-slate-600 text-base mt-3">Layanan terbaik, jujur, transparan, dan terpercaya untuk kenyamanan Anda.</p>
             </div>
+
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-                <!-- Advantage Card 1 -->
-                <div
-                    class="p-8 bg-slate-50/80 rounded-3xl border border-slate-100 hover:border-red-200 hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1 group">
-                    <div
-                        class="w-14 h-14 bg-gradient-to-br from-red-500 to-brand-red text-white rounded-2xl flex items-center justify-center text-2xl font-bold mb-6 shadow-md shadow-red-500/20 group-hover:scale-110 transition duration-300">
+                <!-- Card 1 -->
+                <div class="p-8 bg-slate-50/80 rounded-3xl border border-slate-100 hover:border-red-200 hover:bg-white hover:shadow-card-hover transition-all duration-300 group">
+                    <div class="w-14 h-14 bg-red-100/80 text-brand-red rounded-2xl flex items-center justify-center text-2xl font-bold mb-6 group-hover:scale-110 group-hover:bg-brand-red group-hover:text-white transition duration-300 shadow-sm">
                         <i class="fa-solid fa-bolt"></i>
                     </div>
-                    <h3 class="font-bold text-xl mb-2 text-slate-900">Proses Cepat & Mudah</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">Persyaratan data dijemput dan dibantu 100% sampai
-                        persetujuan
-                        leasing keluar.</p>
+                    <h3 class="font-bold text-xl text-slate-900 mb-3">Proses Cepat & Mudah</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Persyaratan data dijemput dan dibantu 100% sampai persetujuan leasing keluar.</p>
                 </div>
-                <!-- Advantage Card 2 -->
-                <div
-                    class="p-8 bg-slate-50/80 rounded-3xl border border-slate-100 hover:border-red-200 hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1 group">
-                    <div
-                        class="w-14 h-14 bg-gradient-to-br from-red-500 to-brand-red text-white rounded-2xl flex items-center justify-center text-2xl font-bold mb-6 shadow-md shadow-red-500/20 group-hover:scale-110 transition duration-300">
+
+                <!-- Card 2 -->
+                <div class="p-8 bg-slate-50/80 rounded-3xl border border-slate-100 hover:border-red-200 hover:bg-white hover:shadow-card-hover transition-all duration-300 group">
+                    <div class="w-14 h-14 bg-red-100/80 text-brand-red rounded-2xl flex items-center justify-center text-2xl font-bold mb-6 group-hover:scale-110 group-hover:bg-brand-red group-hover:text-white transition duration-300 shadow-sm">
                         <i class="fa-solid fa-percent"></i>
                     </div>
-                    <h3 class="font-bold text-xl mb-2 text-slate-900">DP & Angsuran Ringan</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">Pilihan paket kredit DP minim atau angsuran ringan
-                        yang bisa
-                        disesuaikan budget.</p>
+                    <h3 class="font-bold text-xl text-slate-900 mb-3">DP & Angsuran Ringan</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Pilihan paket kredit DP minim atau angsuran ringan yang bisa disesuaikan budget.</p>
                 </div>
-                <!-- Advantage Card 3 -->
-                <div
-                    class="p-8 bg-slate-50/80 rounded-3xl border border-slate-100 hover:border-red-200 hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1 group">
-                    <div
-                        class="w-14 h-14 bg-gradient-to-br from-red-500 to-brand-red text-white rounded-2xl flex items-center justify-center text-2xl font-bold mb-6 shadow-md shadow-red-500/20 group-hover:scale-110 transition duration-300">
+
+                <!-- Card 3 -->
+                <div class="p-8 bg-slate-50/80 rounded-3xl border border-slate-100 hover:border-red-200 hover:bg-white hover:shadow-card-hover transition-all duration-300 group">
+                    <div class="w-14 h-14 bg-red-100/80 text-brand-red rounded-2xl flex items-center justify-center text-2xl font-bold mb-6 group-hover:scale-110 group-hover:bg-brand-red group-hover:text-white transition duration-300 shadow-sm">
                         <i class="fa-solid fa-arrow-rotate-left"></i>
                     </div>
-                    <h3 class="font-bold text-xl mb-2 text-slate-900">Trade-In Terbaik</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">Terima tukar tambah mobil lama Anda dengan harga
-                        penawaran
-                        tertinggi di pasar.</p>
+                    <h3 class="font-bold text-xl text-slate-900 mb-3">Trade-In Terbaik</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Terima tukar tambah mobil lama Anda dengan harga penawaran tertinggi di pasar.</p>
                 </div>
-                <!-- Advantage Card 4 -->
-                <div
-                    class="p-8 bg-slate-50/80 rounded-3xl border border-slate-100 hover:border-red-200 hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1 group">
-                    <div
-                        class="w-14 h-14 bg-gradient-to-br from-red-500 to-brand-red text-white rounded-2xl flex items-center justify-center text-2xl font-bold mb-6 shadow-md shadow-red-500/20 group-hover:scale-110 transition duration-300">
+
+                <!-- Card 4 -->
+                <div class="p-8 bg-slate-50/80 rounded-3xl border border-slate-100 hover:border-red-200 hover:bg-white hover:shadow-card-hover transition-all duration-300 group">
+                    <div class="w-14 h-14 bg-red-100/80 text-brand-red rounded-2xl flex items-center justify-center text-2xl font-bold mb-6 group-hover:scale-110 group-hover:bg-brand-red group-hover:text-white transition duration-300 shadow-sm">
                         <i class="fa-solid fa-gift"></i>
                     </div>
-                    <h3 class="font-bold text-xl mb-2 text-slate-900">Bonus Aksesoris</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">Kaca film, karpet lembaran, piringan plat, alat
-                        cuci, dan
-                        perlengkapan menarik lainnya.</p>
+                    <h3 class="font-bold text-xl text-slate-900 mb-3">Bonus Aksesoris</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Kaca film, karpet lembaran, piringan plat, alat cuci, dan perlengkapan menarik lainnya.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- KATALOG MOBIL SECTION -->
-    <section id="katalog" class="py-16 md:py-24 bg-slate-50 scroll-mt-20">
+    <section id="katalog" class="py-16 md:py-24 bg-slate-50/60 scroll-mt-20 border-t border-slate-200/60">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-2xl mx-auto mb-10">
-                <span
-                    class="text-brand-red font-bold text-xs sm:text-sm uppercase tracking-widest bg-red-50 px-3.5 py-1 rounded-full border border-red-100">Pilihan
-                    Terbaik</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3">Katalog Mobil Daihatsu</h2>
-                <p class="text-slate-600 text-base mt-2">Pilih kategori mobil Daihatsu sesuai kebutuhan
-                    mobilitas Anda.</p>
+            <div class="text-center max-w-2xl mx-auto mb-10 md:mb-12">
+                <span class="text-brand-red font-bold text-xs sm:text-sm uppercase tracking-widest block mb-2">Pilihan Unit</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Katalog Mobil Daihatsu</h2>
+                <p class="text-slate-600 text-base mt-2">Pilih kategori mobil Daihatsu sesuai kebutuhan mobilitas Anda.</p>
             </div>
 
             <!-- Filter Buttons -->
-            <div class="flex flex-wrap justify-center gap-2 sm:gap-3 mb-10">
+            <div class="flex flex-wrap justify-center gap-2.5 mb-10 md:mb-14">
                 <button
-                    class="filter-btn active bg-brand-red text-white shadow-md font-semibold px-5 py-2.5 rounded-full transition-all duration-300 text-xs sm:text-sm"
+                    class="filter-btn active bg-brand-red text-white shadow-glow-red font-bold px-5 py-2.5 rounded-full transition-all duration-300 text-xs sm:text-sm"
                     data-category="all">
                     Semua Unit
                 </button>
                 <button
-                    class="filter-btn bg-white text-slate-600 hover:bg-slate-200 font-medium px-5 py-2.5 rounded-full transition-all duration-300 text-xs sm:text-sm shadow-sm"
+                    class="filter-btn bg-white border border-slate-200 text-slate-700 hover:border-slate-300 hover:bg-slate-100 font-semibold px-5 py-2.5 rounded-full transition-all duration-300 text-xs sm:text-sm"
                     data-category="mpv">
                     MPV / Family
                 </button>
                 <button
-                    class="filter-btn bg-white text-slate-600 hover:bg-slate-200 font-medium px-5 py-2.5 rounded-full transition-all duration-300 text-xs sm:text-sm shadow-sm"
+                    class="filter-btn bg-white border border-slate-200 text-slate-700 hover:border-slate-300 hover:bg-slate-100 font-semibold px-5 py-2.5 rounded-full transition-all duration-300 text-xs sm:text-sm"
                     data-category="suv">
                     SUV / Crossover
                 </button>
                 <button
-                    class="filter-btn bg-white text-slate-600 hover:bg-slate-200 font-medium px-5 py-2.5 rounded-full transition-all duration-300 text-xs sm:text-sm shadow-sm"
+                    class="filter-btn bg-white border border-slate-200 text-slate-700 hover:border-slate-300 hover:bg-slate-100 font-semibold px-5 py-2.5 rounded-full transition-all duration-300 text-xs sm:text-sm"
                     data-category="city">
                     City Car / Hatchback
                 </button>
                 <button
-                    class="filter-btn bg-white text-slate-600 hover:bg-slate-200 font-medium px-5 py-2.5 rounded-full transition-all duration-300 text-xs sm:text-sm shadow-sm"
+                    class="filter-btn bg-white border border-slate-200 text-slate-700 hover:border-slate-300 hover:bg-slate-100 font-semibold px-5 py-2.5 rounded-full transition-all duration-300 text-xs sm:text-sm"
                     data-category="commercial">
                     Komersial / Niaga
                 </button>
@@ -437,322 +419,279 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
                 <!-- Card: All-New Xenia -->
-                <div class="car-card bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-card-hover transition-all duration-300 flex flex-col border border-slate-200/80 hover:-translate-y-1 group"
+                <div class="car-card bg-white rounded-3xl overflow-hidden border border-slate-200/80 shadow-card hover:shadow-card-hover hover:border-red-200 transition-all duration-300 flex flex-col group transform hover:-translate-y-1"
                     data-category="mpv">
-                    <div
-                        class="p-6 bg-gradient-to-b from-slate-100 to-slate-50 flex justify-center items-center h-52 relative overflow-hidden">
-                        <img src="assets/xenia.png" alt="Daihatsu Xenia"
-                            class="max-h-full object-contain transition duration-500 group-hover:scale-105 relative z-10"
+                    <div class="p-6 bg-gradient-to-b from-slate-100 to-slate-50/50 flex justify-center items-center h-52 relative overflow-hidden">
+                        <img src="assets/xenia.png" alt="Daihatsu Xenia" class="max-h-full object-contain transition duration-500 group-hover:scale-105"
                             onerror="this.src='https://placehold.co/400x250/e1001a/ffffff?text=Daihatsu+Xenia'">
                     </div>
-                    <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div class="p-7 flex-1 flex flex-col justify-between">
                         <div>
-                            <span
-                                class="text-xs font-bold uppercase tracking-wider text-brand-red bg-red-50 px-2.5 py-1 rounded-md border border-red-100 inline-block mb-3">MPV
-                                7-Seater</span>
-                            <h3 class="text-2xl font-bold text-slate-900 mb-1">All New Xenia</h3>
-                            <p class="text-xs text-slate-500 mb-5 leading-relaxed">Keluarga makin nyaman dengan MPV
-                                andalan handal dan
-                                efisien.</p>
-                            <div
-                                class="text-sm text-slate-700 space-y-2 mb-6 bg-slate-50 p-3.5 rounded-2xl border border-slate-100">
-                                <p class="flex justify-between items-center"><span class="text-slate-500"><i
-                                            class="fa-solid fa-tag text-brand-red mr-2"></i> OTR Mulai</span> <strong
-                                        class="text-slate-900 font-bold">Rp 220.000.000</strong></p>
-                                <p class="flex justify-between items-center"><span class="text-slate-500"><i
-                                            class="fa-solid fa-coins text-brand-red mr-2"></i> DP Mulai</span> <strong
-                                        class="text-brand-red font-bold">15 Jutaan</strong></p>
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-brand-red bg-red-50 border border-red-100 px-3 py-1 rounded-full">MPV 7-Seater</span>
+                            <h3 class="text-2xl font-bold text-slate-900 mt-3 mb-2">All New Xenia</h3>
+                            <p class="text-xs text-slate-500 mb-6 leading-relaxed">Keluarga makin nyaman dengan MPV andalan handal dan efisien.</p>
+                            <div class="bg-slate-50 rounded-2xl p-4 text-sm text-slate-700 space-y-2 mb-6 border border-slate-100">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-500 text-xs flex items-center gap-1.5"><i class="fa-solid fa-tag text-brand-red"></i> OTR Mulai</span>
+                                    <strong class="text-slate-900 font-bold">Rp 220.000.000</strong>
+                                </div>
+                                <div class="flex justify-between items-center border-t border-slate-200/60 pt-2">
+                                    <span class="text-slate-500 text-xs flex items-center gap-1.5"><i class="fa-solid fa-coins text-amber-500"></i> DP Mulai</span>
+                                    <strong class="text-brand-red font-bold">15 Jutaan</strong>
+                                </div>
                             </div>
                         </div>
                         <a href="https://wa.me/628123456789?text=Halo%20Sales,%20saya%20tertarik%20dengan%20promo%20Daihatsu%20Xenia"
                             target="_blank"
-                            class="w-full bg-brand-red hover:bg-brand-red-dark text-white font-semibold py-3 rounded-xl text-center transition duration-300 flex items-center justify-center gap-2 shadow-md">
+                            class="w-full bg-slate-900 hover:bg-brand-red text-white font-bold py-3.5 rounded-xl text-center transition duration-300 flex items-center justify-center gap-2 shadow-sm">
                             <i class="fa-brands fa-whatsapp text-lg"></i> Minta Penawaran
                         </a>
                     </div>
                 </div>
 
                 <!-- Card: Terios -->
-                <div class="car-card bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-card-hover transition-all duration-300 flex flex-col border border-slate-200/80 hover:-translate-y-1 group"
+                <div class="car-card bg-white rounded-3xl overflow-hidden border border-slate-200/80 shadow-card hover:shadow-card-hover hover:border-red-200 transition-all duration-300 flex flex-col group transform hover:-translate-y-1"
                     data-category="suv">
-                    <div
-                        class="p-6 bg-gradient-to-b from-slate-100 to-slate-50 flex justify-center items-center h-52 relative overflow-hidden">
-                        <img src="assets/terios.png" alt="Daihatsu Terios"
-                            class="max-h-full object-contain transition duration-500 group-hover:scale-105 relative z-10"
+                    <div class="p-6 bg-gradient-to-b from-slate-100 to-slate-50/50 flex justify-center items-center h-52 relative overflow-hidden">
+                        <img src="assets/terios.png" alt="Daihatsu Terios" class="max-h-full object-contain transition duration-500 group-hover:scale-105"
                             onerror="this.src='https://placehold.co/400x250/e1001a/ffffff?text=Daihatsu+Terios'">
                     </div>
-                    <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div class="p-7 flex-1 flex flex-col justify-between">
                         <div>
-                            <span
-                                class="text-xs font-bold uppercase tracking-wider text-brand-red bg-red-50 px-2.5 py-1 rounded-md border border-red-100 inline-block mb-3">SUV
-                                Tangguh</span>
-                            <h3 class="text-2xl font-bold text-slate-900 mb-1">New Terios</h3>
-                            <p class="text-xs text-slate-500 mb-5 leading-relaxed">SUV 7-seater gagah untuk petualangan
-                                keluarga di
-                                segala medan.</p>
-                            <div
-                                class="text-sm text-slate-700 space-y-2 mb-6 bg-slate-50 p-3.5 rounded-2xl border border-slate-100">
-                                <p class="flex justify-between items-center"><span class="text-slate-500"><i
-                                            class="fa-solid fa-tag text-brand-red mr-2"></i> OTR Mulai</span> <strong
-                                        class="text-slate-900 font-bold">Rp 240.000.000</strong></p>
-                                <p class="flex justify-between items-center"><span class="text-slate-500"><i
-                                            class="fa-solid fa-coins text-brand-red mr-2"></i> DP Mulai</span> <strong
-                                        class="text-brand-red font-bold">20 Jutaan</strong></p>
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-brand-red bg-red-50 border border-red-100 px-3 py-1 rounded-full">SUV Tangguh</span>
+                            <h3 class="text-2xl font-bold text-slate-900 mt-3 mb-2">New Terios</h3>
+                            <p class="text-xs text-slate-500 mb-6 leading-relaxed">SUV 7-seater gagah untuk petualangan keluarga di segala medan.</p>
+                            <div class="bg-slate-50 rounded-2xl p-4 text-sm text-slate-700 space-y-2 mb-6 border border-slate-100">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-500 text-xs flex items-center gap-1.5"><i class="fa-solid fa-tag text-brand-red"></i> OTR Mulai</span>
+                                    <strong class="text-slate-900 font-bold">Rp 240.000.000</strong>
+                                </div>
+                                <div class="flex justify-between items-center border-t border-slate-200/60 pt-2">
+                                    <span class="text-slate-500 text-xs flex items-center gap-1.5"><i class="fa-solid fa-coins text-amber-500"></i> DP Mulai</span>
+                                    <strong class="text-brand-red font-bold">20 Jutaan</strong>
+                                </div>
                             </div>
                         </div>
                         <a href="https://wa.me/628123456789?text=Halo%20Sales,%20saya%20tertarik%20dengan%20promo%20Daihatsu%20Terios"
                             target="_blank"
-                            class="w-full bg-brand-red hover:bg-brand-red-dark text-white font-semibold py-3 rounded-xl text-center transition duration-300 flex items-center justify-center gap-2 shadow-md">
+                            class="w-full bg-slate-900 hover:bg-brand-red text-white font-bold py-3.5 rounded-xl text-center transition duration-300 flex items-center justify-center gap-2 shadow-sm">
                             <i class="fa-brands fa-whatsapp text-lg"></i> Minta Penawaran
                         </a>
                     </div>
                 </div>
 
                 <!-- Card: Rocky -->
-                <div class="car-card bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-card-hover transition-all duration-300 flex flex-col border border-slate-200/80 hover:-translate-y-1 group"
+                <div class="car-card bg-white rounded-3xl overflow-hidden border border-slate-200/80 shadow-card hover:shadow-card-hover hover:border-red-200 transition-all duration-300 flex flex-col group transform hover:-translate-y-1"
                     data-category="suv">
-                    <div
-                        class="p-6 bg-gradient-to-b from-slate-100 to-slate-50 flex justify-center items-center h-52 relative overflow-hidden">
-                        <img src="assets/rocky.png" alt="Daihatsu Rocky"
-                            class="max-h-full object-contain transition duration-500 group-hover:scale-105 relative z-10"
+                    <div class="p-6 bg-gradient-to-b from-slate-100 to-slate-50/50 flex justify-center items-center h-52 relative overflow-hidden">
+                        <img src="assets/rocky.png" alt="Daihatsu Rocky" class="max-h-full object-contain transition duration-500 group-hover:scale-105"
                             onerror="this.src='https://placehold.co/400x250/e1001a/ffffff?text=Daihatsu+Rocky'">
                     </div>
-                    <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div class="p-7 flex-1 flex flex-col justify-between">
                         <div>
-                            <span
-                                class="text-xs font-bold uppercase tracking-wider text-brand-red bg-red-50 px-2.5 py-1 rounded-md border border-red-100 inline-block mb-3">Compact
-                                SUV</span>
-                            <h3 class="text-2xl font-bold text-slate-900 mb-1">Daihatsu Rocky</h3>
-                            <p class="text-xs text-slate-500 mb-5 leading-relaxed">Desain stylish, mesin Turbo irit,
-                                cocok untuk gaya
-                                hidup aktif.</p>
-                            <div
-                                class="text-sm text-slate-700 space-y-2 mb-6 bg-slate-50 p-3.5 rounded-2xl border border-slate-100">
-                                <p class="flex justify-between items-center"><span class="text-slate-500"><i
-                                            class="fa-solid fa-tag text-brand-red mr-2"></i> OTR Mulai</span> <strong
-                                        class="text-slate-900 font-bold">Rp 210.000.000</strong></p>
-                                <p class="flex justify-between items-center"><span class="text-slate-500"><i
-                                            class="fa-solid fa-coins text-brand-red mr-2"></i> DP Mulai</span> <strong
-                                        class="text-brand-red font-bold">10 Jutaan</strong></p>
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-brand-red bg-red-50 border border-red-100 px-3 py-1 rounded-full">Compact SUV</span>
+                            <h3 class="text-2xl font-bold text-slate-900 mt-3 mb-2">Daihatsu Rocky</h3>
+                            <p class="text-xs text-slate-500 mb-6 leading-relaxed">Desain stylish, mesin Turbo irit, cocok untuk gaya hidup aktif.</p>
+                            <div class="bg-slate-50 rounded-2xl p-4 text-sm text-slate-700 space-y-2 mb-6 border border-slate-100">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-500 text-xs flex items-center gap-1.5"><i class="fa-solid fa-tag text-brand-red"></i> OTR Mulai</span>
+                                    <strong class="text-slate-900 font-bold">Rp 210.000.000</strong>
+                                </div>
+                                <div class="flex justify-between items-center border-t border-slate-200/60 pt-2">
+                                    <span class="text-slate-500 text-xs flex items-center gap-1.5"><i class="fa-solid fa-coins text-amber-500"></i> DP Mulai</span>
+                                    <strong class="text-brand-red font-bold">10 Jutaan</strong>
+                                </div>
                             </div>
                         </div>
                         <a href="https://wa.me/628123456789?text=Halo%20Sales,%20saya%20tertarik%20dengan%20promo%20Daihatsu%20Rocky"
                             target="_blank"
-                            class="w-full bg-brand-red hover:bg-brand-red-dark text-white font-semibold py-3 rounded-xl text-center transition duration-300 flex items-center justify-center gap-2 shadow-md">
+                            class="w-full bg-slate-900 hover:bg-brand-red text-white font-bold py-3.5 rounded-xl text-center transition duration-300 flex items-center justify-center gap-2 shadow-sm">
                             <i class="fa-brands fa-whatsapp text-lg"></i> Minta Penawaran
                         </a>
                     </div>
                 </div>
 
                 <!-- Card: Sigra -->
-                <div class="car-card bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-card-hover transition-all duration-300 flex flex-col border border-slate-200/80 hover:-translate-y-1 group"
+                <div class="car-card bg-white rounded-3xl overflow-hidden border border-slate-200/80 shadow-card hover:shadow-card-hover hover:border-red-200 transition-all duration-300 flex flex-col group transform hover:-translate-y-1"
                     data-category="mpv">
-                    <div
-                        class="p-6 bg-gradient-to-b from-slate-100 to-slate-50 flex justify-center items-center h-52 relative overflow-hidden">
-                        <img src="assets/sigra.png" alt="Daihatsu Sigra"
-                            class="max-h-full object-contain transition duration-500 group-hover:scale-105 relative z-10"
+                    <div class="p-6 bg-gradient-to-b from-slate-100 to-slate-50/50 flex justify-center items-center h-52 relative overflow-hidden">
+                        <img src="assets/sigra.png" alt="Daihatsu Sigra" class="max-h-full object-contain transition duration-500 group-hover:scale-105"
                             onerror="this.src='https://placehold.co/400x250/e1001a/ffffff?text=Daihatsu+Sigra'">
                     </div>
-                    <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div class="p-7 flex-1 flex flex-col justify-between">
                         <div>
-                            <span
-                                class="text-xs font-bold uppercase tracking-wider text-brand-red bg-red-50 px-2.5 py-1 rounded-md border border-red-100 inline-block mb-3">LCGC
-                                MPV</span>
-                            <h3 class="text-2xl font-bold text-slate-900 mb-1">New Sigra</h3>
-                            <p class="text-xs text-slate-500 mb-5 leading-relaxed">Mobil keluarga paling ekonomis, muat
-                                7 penumpang.</p>
-                            <div
-                                class="text-sm text-slate-700 space-y-2 mb-6 bg-slate-50 p-3.5 rounded-2xl border border-slate-100">
-                                <p class="flex justify-between items-center"><span class="text-slate-500"><i
-                                            class="fa-solid fa-tag text-brand-red mr-2"></i> OTR Mulai</span> <strong
-                                        class="text-slate-900 font-bold">Rp 138.000.000</strong></p>
-                                <p class="flex justify-between items-center"><span class="text-slate-500"><i
-                                            class="fa-solid fa-coins text-brand-red mr-2"></i> DP Mulai</span> <strong
-                                        class="text-brand-red font-bold">8 Jutaan</strong></p>
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-brand-red bg-red-50 border border-red-100 px-3 py-1 rounded-full">LCGC MPV</span>
+                            <h3 class="text-2xl font-bold text-slate-900 mt-3 mb-2">New Sigra</h3>
+                            <p class="text-xs text-slate-500 mb-6 leading-relaxed">Mobil keluarga paling ekonomis, muat 7 penumpang.</p>
+                            <div class="bg-slate-50 rounded-2xl p-4 text-sm text-slate-700 space-y-2 mb-6 border border-slate-100">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-500 text-xs flex items-center gap-1.5"><i class="fa-solid fa-tag text-brand-red"></i> OTR Mulai</span>
+                                    <strong class="text-slate-900 font-bold">Rp 138.000.000</strong>
+                                </div>
+                                <div class="flex justify-between items-center border-t border-slate-200/60 pt-2">
+                                    <span class="text-slate-500 text-xs flex items-center gap-1.5"><i class="fa-solid fa-coins text-amber-500"></i> DP Mulai</span>
+                                    <strong class="text-brand-red font-bold">8 Jutaan</strong>
+                                </div>
                             </div>
                         </div>
                         <a href="https://wa.me/628123456789?text=Halo%20Sales,%20saya%20tertarik%20dengan%20promo%20Daihatsu%20Sigra"
                             target="_blank"
-                            class="w-full bg-brand-red hover:bg-brand-red-dark text-white font-semibold py-3 rounded-xl text-center transition duration-300 flex items-center justify-center gap-2 shadow-md">
+                            class="w-full bg-slate-900 hover:bg-brand-red text-white font-bold py-3.5 rounded-xl text-center transition duration-300 flex items-center justify-center gap-2 shadow-sm">
                             <i class="fa-brands fa-whatsapp text-lg"></i> Minta Penawaran
                         </a>
                     </div>
                 </div>
 
                 <!-- Card: Ayla -->
-                <div class="car-card bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-card-hover transition-all duration-300 flex flex-col border border-slate-200/80 hover:-translate-y-1 group"
+                <div class="car-card bg-white rounded-3xl overflow-hidden border border-slate-200/80 shadow-card hover:shadow-card-hover hover:border-red-200 transition-all duration-300 flex flex-col group transform hover:-translate-y-1"
                     data-category="city">
-                    <div
-                        class="p-6 bg-gradient-to-b from-slate-100 to-slate-50 flex justify-center items-center h-52 relative overflow-hidden">
-                        <img src="assets/ayla.png" alt="Daihatsu Ayla"
-                            class="max-h-full object-contain transition duration-500 group-hover:scale-105 relative z-10"
+                    <div class="p-6 bg-gradient-to-b from-slate-100 to-slate-50/50 flex justify-center items-center h-52 relative overflow-hidden">
+                        <img src="assets/ayla.png" alt="Daihatsu Ayla" class="max-h-full object-contain transition duration-500 group-hover:scale-105"
                             onerror="this.src='https://placehold.co/400x250/e1001a/ffffff?text=Daihatsu+Ayla'">
                     </div>
-                    <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div class="p-7 flex-1 flex flex-col justify-between">
                         <div>
-                            <span
-                                class="text-xs font-bold uppercase tracking-wider text-brand-red bg-red-50 px-2.5 py-1 rounded-md border border-red-100 inline-block mb-3">City
-                                Car</span>
-                            <h3 class="text-2xl font-bold text-slate-900 mb-1">All New Ayla</h3>
-                            <p class="text-xs text-slate-500 mb-5 leading-relaxed">Lincah di jalanan kota, irit bahan
-                                bakar, modern.</p>
-                            <div
-                                class="text-sm text-slate-700 space-y-2 mb-6 bg-slate-50 p-3.5 rounded-2xl border border-slate-100">
-                                <p class="flex justify-between items-center"><span class="text-slate-500"><i
-                                            class="fa-solid fa-tag text-brand-red mr-2"></i> OTR Mulai</span> <strong
-                                        class="text-slate-900 font-bold">Rp 135.000.000</strong></p>
-                                <p class="flex justify-between items-center"><span class="text-slate-500"><i
-                                            class="fa-solid fa-coins text-brand-red mr-2"></i> DP Mulai</span> <strong
-                                        class="text-brand-red font-bold">7 Jutaan</strong></p>
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-brand-red bg-red-50 border border-red-100 px-3 py-1 rounded-full">City Car</span>
+                            <h3 class="text-2xl font-bold text-slate-900 mt-3 mb-2">All New Ayla</h3>
+                            <p class="text-xs text-slate-500 mb-6 leading-relaxed">Lincah di jalanan kota, irit bahan bakar, modern.</p>
+                            <div class="bg-slate-50 rounded-2xl p-4 text-sm text-slate-700 space-y-2 mb-6 border border-slate-100">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-500 text-xs flex items-center gap-1.5"><i class="fa-solid fa-tag text-brand-red"></i> OTR Mulai</span>
+                                    <strong class="text-slate-900 font-bold">Rp 135.000.000</strong>
+                                </div>
+                                <div class="flex justify-between items-center border-t border-slate-200/60 pt-2">
+                                    <span class="text-slate-500 text-xs flex items-center gap-1.5"><i class="fa-solid fa-coins text-amber-500"></i> DP Mulai</span>
+                                    <strong class="text-brand-red font-bold">7 Jutaan</strong>
+                                </div>
                             </div>
                         </div>
                         <a href="https://wa.me/628123456789?text=Halo%20Sales,%20saya%20tertarik%20dengan%20promo%20Daihatsu%20Ayla"
                             target="_blank"
-                            class="w-full bg-brand-red hover:bg-brand-red-dark text-white font-semibold py-3 rounded-xl text-center transition duration-300 flex items-center justify-center gap-2 shadow-md">
+                            class="w-full bg-slate-900 hover:bg-brand-red text-white font-bold py-3.5 rounded-xl text-center transition duration-300 flex items-center justify-center gap-2 shadow-sm">
                             <i class="fa-brands fa-whatsapp text-lg"></i> Minta Penawaran
                         </a>
                     </div>
                 </div>
 
                 <!-- Card: Sirion -->
-                <div class="car-card bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-card-hover transition-all duration-300 flex flex-col border border-slate-200/80 hover:-translate-y-1 group"
+                <div class="car-card bg-white rounded-3xl overflow-hidden border border-slate-200/80 shadow-card hover:shadow-card-hover hover:border-red-200 transition-all duration-300 flex flex-col group transform hover:-translate-y-1"
                     data-category="city">
-                    <div
-                        class="p-6 bg-gradient-to-b from-slate-100 to-slate-50 flex justify-center items-center h-52 relative overflow-hidden">
-                        <img src="assets/sirion.png" alt="Daihatsu Sirion"
-                            class="max-h-full object-contain transition duration-500 group-hover:scale-105 relative z-10"
+                    <div class="p-6 bg-gradient-to-b from-slate-100 to-slate-50/50 flex justify-center items-center h-52 relative overflow-hidden">
+                        <img src="assets/sirion.png" alt="Daihatsu Sirion" class="max-h-full object-contain transition duration-500 group-hover:scale-105"
                             onerror="this.src='https://placehold.co/400x250/e1001a/ffffff?text=Daihatsu+Sirion'">
                     </div>
-                    <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div class="p-7 flex-1 flex flex-col justify-between">
                         <div>
-                            <span
-                                class="text-xs font-bold uppercase tracking-wider text-brand-red bg-red-50 px-2.5 py-1 rounded-md border border-red-100 inline-block mb-3">Hatchback
-                                Stylish</span>
-                            <h3 class="text-2xl font-bold text-slate-900 mb-1">New Sirion</h3>
-                            <p class="text-xs text-slate-500 mb-5 leading-relaxed">City car berfitur canggih, kaya fitur
-                                keselamatan, dan
-                                nyaman.</p>
-                            <div
-                                class="text-sm text-slate-700 space-y-2 mb-6 bg-slate-50 p-3.5 rounded-2xl border border-slate-100">
-                                <p class="flex justify-between items-center"><span class="text-slate-500"><i
-                                            class="fa-solid fa-tag text-brand-red mr-2"></i> OTR Mulai</span> <strong
-                                        class="text-slate-900 font-bold">Rp 230.000.000</strong></p>
-                                <p class="flex justify-between items-center"><span class="text-slate-500"><i
-                                            class="fa-solid fa-coins text-brand-red mr-2"></i> DP Mulai</span> <strong
-                                        class="text-brand-red font-bold">15 Jutaan</strong></p>
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-brand-red bg-red-50 border border-red-100 px-3 py-1 rounded-full">Hatchback Stylish</span>
+                            <h3 class="text-2xl font-bold text-slate-900 mt-3 mb-2">New Sirion</h3>
+                            <p class="text-xs text-slate-500 mb-6 leading-relaxed">City car berfitur canggih, kaya fitur keselamatan, dan nyaman.</p>
+                            <div class="bg-slate-50 rounded-2xl p-4 text-sm text-slate-700 space-y-2 mb-6 border border-slate-100">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-500 text-xs flex items-center gap-1.5"><i class="fa-solid fa-tag text-brand-red"></i> OTR Mulai</span>
+                                    <strong class="text-slate-900 font-bold">Rp 230.000.000</strong>
+                                </div>
+                                <div class="flex justify-between items-center border-t border-slate-200/60 pt-2">
+                                    <span class="text-slate-500 text-xs flex items-center gap-1.5"><i class="fa-solid fa-coins text-amber-500"></i> DP Mulai</span>
+                                    <strong class="text-brand-red font-bold">15 Jutaan</strong>
+                                </div>
                             </div>
                         </div>
                         <a href="https://wa.me/628123456789?text=Halo%20Sales,%20saya%20tertarik%20dengan%20promo%20Daihatsu%20Sirion"
                             target="_blank"
-                            class="w-full bg-brand-red hover:bg-brand-red-dark text-white font-semibold py-3 rounded-xl text-center transition duration-300 flex items-center justify-center gap-2 shadow-md">
+                            class="w-full bg-slate-900 hover:bg-brand-red text-white font-bold py-3.5 rounded-xl text-center transition duration-300 flex items-center justify-center gap-2 shadow-sm">
                             <i class="fa-brands fa-whatsapp text-lg"></i> Minta Penawaran
                         </a>
                     </div>
                 </div>
 
                 <!-- Card: Luxio -->
-                <div class="car-card bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-card-hover transition-all duration-300 flex flex-col border border-slate-200/80 hover:-translate-y-1 group"
+                <div class="car-card bg-white rounded-3xl overflow-hidden border border-slate-200/80 shadow-card hover:shadow-card-hover hover:border-red-200 transition-all duration-300 flex flex-col group transform hover:-translate-y-1"
                     data-category="mpv">
-                    <div
-                        class="p-6 bg-gradient-to-b from-slate-100 to-slate-50 flex justify-center items-center h-52 relative overflow-hidden">
-                        <img src="assets/luxio.png" alt="Daihatsu Luxio"
-                            class="max-h-full object-contain transition duration-500 group-hover:scale-105 relative z-10"
+                    <div class="p-6 bg-gradient-to-b from-slate-100 to-slate-50/50 flex justify-center items-center h-52 relative overflow-hidden">
+                        <img src="assets/luxio.png" alt="Daihatsu Luxio" class="max-h-full object-contain transition duration-500 group-hover:scale-105"
                             onerror="this.src='https://placehold.co/400x250/e1001a/ffffff?text=Daihatsu+Luxio'">
                     </div>
-                    <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div class="p-7 flex-1 flex flex-col justify-between">
                         <div>
-                            <span
-                                class="text-xs font-bold uppercase tracking-wider text-brand-red bg-red-50 px-2.5 py-1 rounded-md border border-red-100 inline-block mb-3">MPV
-                                Elegan</span>
-                            <h3 class="text-2xl font-bold text-slate-900 mb-1">Daihatsu Luxio</h3>
-                            <p class="text-xs text-slate-500 mb-5 leading-relaxed">Kabin ekstra lapang dengan pintu
-                                geser (sliding door)
-                                yang praktis.</p>
-                            <div
-                                class="text-sm text-slate-700 space-y-2 mb-6 bg-slate-50 p-3.5 rounded-2xl border border-slate-100">
-                                <p class="flex justify-between items-center"><span class="text-slate-500"><i
-                                            class="fa-solid fa-tag text-brand-red mr-2"></i> OTR Mulai</span> <strong
-                                        class="text-slate-900 font-bold">Rp 235.000.000</strong></p>
-                                <p class="flex justify-between items-center"><span class="text-slate-500"><i
-                                            class="fa-solid fa-coins text-brand-red mr-2"></i> DP Mulai</span> <strong
-                                        class="text-brand-red font-bold">15 Jutaan</strong></p>
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-brand-red bg-red-50 border border-red-100 px-3 py-1 rounded-full">MPV Elegan</span>
+                            <h3 class="text-2xl font-bold text-slate-900 mt-3 mb-2">Daihatsu Luxio</h3>
+                            <p class="text-xs text-slate-500 mb-6 leading-relaxed">Kabin ekstra lapang dengan pintu geser (sliding door) yang praktis.</p>
+                            <div class="bg-slate-50 rounded-2xl p-4 text-sm text-slate-700 space-y-2 mb-6 border border-slate-100">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-500 text-xs flex items-center gap-1.5"><i class="fa-solid fa-tag text-brand-red"></i> OTR Mulai</span>
+                                    <strong class="text-slate-900 font-bold">Rp 235.000.000</strong>
+                                </div>
+                                <div class="flex justify-between items-center border-t border-slate-200/60 pt-2">
+                                    <span class="text-slate-500 text-xs flex items-center gap-1.5"><i class="fa-solid fa-coins text-amber-500"></i> DP Mulai</span>
+                                    <strong class="text-brand-red font-bold">15 Jutaan</strong>
+                                </div>
                             </div>
                         </div>
                         <a href="https://wa.me/628123456789?text=Halo%20Sales,%20saya%20tertarik%20dengan%20promo%20Daihatsu%20Luxio"
                             target="_blank"
-                            class="w-full bg-brand-red hover:bg-brand-red-dark text-white font-semibold py-3 rounded-xl text-center transition duration-300 flex items-center justify-center gap-2 shadow-md">
+                            class="w-full bg-slate-900 hover:bg-brand-red text-white font-bold py-3.5 rounded-xl text-center transition duration-300 flex items-center justify-center gap-2 shadow-sm">
                             <i class="fa-brands fa-whatsapp text-lg"></i> Minta Penawaran
                         </a>
                     </div>
                 </div>
 
                 <!-- Card: Gran Max MB -->
-                <div class="car-card bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-card-hover transition-all duration-300 flex flex-col border border-slate-200/80 hover:-translate-y-1 group"
+                <div class="car-card bg-white rounded-3xl overflow-hidden border border-slate-200/80 shadow-card hover:shadow-card-hover hover:border-red-200 transition-all duration-300 flex flex-col group transform hover:-translate-y-1"
                     data-category="commercial">
-                    <div
-                        class="p-6 bg-gradient-to-b from-slate-100 to-slate-50 flex justify-center items-center h-52 relative overflow-hidden">
-                        <img src="assets/granmax-mb.png" alt="Gran Max Mini Bus"
-                            class="max-h-full object-contain transition duration-500 group-hover:scale-105 relative z-10"
+                    <div class="p-6 bg-gradient-to-b from-slate-100 to-slate-50/50 flex justify-center items-center h-52 relative overflow-hidden">
+                        <img src="assets/granmax-mb.png" alt="Gran Max Mini Bus" class="max-h-full object-contain transition duration-500 group-hover:scale-105"
                             onerror="this.src='https://placehold.co/400x250/e1001a/ffffff?text=Granmax+MB'">
                     </div>
-                    <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div class="p-7 flex-1 flex flex-col justify-between">
                         <div>
-                            <span
-                                class="text-xs font-bold uppercase tracking-wider text-brand-red bg-red-50 px-2.5 py-1 rounded-md border border-red-100 inline-block mb-3">Minibus
-                                Serbaguna</span>
-                            <h3 class="text-2xl font-bold text-slate-900 mb-1">Gran Max Mini Bus</h3>
-                            <p class="text-xs text-slate-500 mb-5 leading-relaxed">Kapasitas muatan ekstra besar untuk
-                                kebutuhan bisnis
-                                dan usaha.</p>
-                            <div
-                                class="text-sm text-slate-700 space-y-2 mb-6 bg-slate-50 p-3.5 rounded-2xl border border-slate-100">
-                                <p class="flex justify-between items-center"><span class="text-slate-500"><i
-                                            class="fa-solid fa-tag text-brand-red mr-2"></i> OTR Mulai</span> <strong
-                                        class="text-slate-900 font-bold">Rp 200.000.000</strong></p>
-                                <p class="flex justify-between items-center"><span class="text-slate-500"><i
-                                            class="fa-solid fa-coins text-brand-red mr-2"></i> DP Mulai</span> <strong
-                                        class="text-brand-red font-bold">10 Jutaan</strong></p>
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-brand-red bg-red-50 border border-red-100 px-3 py-1 rounded-full">Minibus Serbaguna</span>
+                            <h3 class="text-2xl font-bold text-slate-900 mt-3 mb-2">Gran Max Mini Bus</h3>
+                            <p class="text-xs text-slate-500 mb-6 leading-relaxed">Kapasitas muatan ekstra besar untuk kebutuhan bisnis dan usaha.</p>
+                            <div class="bg-slate-50 rounded-2xl p-4 text-sm text-slate-700 space-y-2 mb-6 border border-slate-100">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-500 text-xs flex items-center gap-1.5"><i class="fa-solid fa-tag text-brand-red"></i> OTR Mulai</span>
+                                    <strong class="text-slate-900 font-bold">Rp 200.000.000</strong>
+                                </div>
+                                <div class="flex justify-between items-center border-t border-slate-200/60 pt-2">
+                                    <span class="text-slate-500 text-xs flex items-center gap-1.5"><i class="fa-solid fa-coins text-amber-500"></i> DP Mulai</span>
+                                    <strong class="text-brand-red font-bold">10 Jutaan</strong>
+                                </div>
                             </div>
                         </div>
                         <a href="https://wa.me/628123456789?text=Halo%20Sales,%20saya%20tertarik%20dengan%20promo%20Gran%20Max%20MB"
                             target="_blank"
-                            class="w-full bg-brand-red hover:bg-brand-red-dark text-white font-semibold py-3 rounded-xl text-center transition duration-300 flex items-center justify-center gap-2 shadow-md">
+                            class="w-full bg-slate-900 hover:bg-brand-red text-white font-bold py-3.5 rounded-xl text-center transition duration-300 flex items-center justify-center gap-2 shadow-sm">
                             <i class="fa-brands fa-whatsapp text-lg"></i> Minta Penawaran
                         </a>
                     </div>
                 </div>
 
                 <!-- Card: Gran Max PU -->
-                <div class="car-card bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-card-hover transition-all duration-300 flex flex-col border border-slate-200/80 hover:-translate-y-1 group"
+                <div class="car-card bg-white rounded-3xl overflow-hidden border border-slate-200/80 shadow-card hover:shadow-card-hover hover:border-red-200 transition-all duration-300 flex flex-col group transform hover:-translate-y-1"
                     data-category="commercial">
-                    <div
-                        class="p-6 bg-gradient-to-b from-slate-100 to-slate-50 flex justify-center items-center h-52 relative overflow-hidden">
-                        <img src="assets/granmax-pu.png" alt="Gran Max Pick Up"
-                            class="max-h-full object-contain transition duration-500 group-hover:scale-105 relative z-10"
+                    <div class="p-6 bg-gradient-to-b from-slate-100 to-slate-50/50 flex justify-center items-center h-52 relative overflow-hidden">
+                        <img src="assets/granmax-pu.png" alt="Gran Max Pick Up" class="max-h-full object-contain transition duration-500 group-hover:scale-105"
                             onerror="this.src='https://placehold.co/400x250/e1001a/ffffff?text=Granmax+PU'">
                     </div>
-                    <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div class="p-7 flex-1 flex flex-col justify-between">
                         <div>
-                            <span
-                                class="text-xs font-bold uppercase tracking-wider text-brand-red bg-red-50 px-2.5 py-1 rounded-md border border-red-100 inline-block mb-3">Pick
-                                Up Niaga</span>
-                            <h3 class="text-2xl font-bold text-slate-900 mb-1">Gran Max Pick Up</h3>
-                            <p class="text-xs text-slate-500 mb-5 leading-relaxed">Sahabat bisnis terpercaya, bak luas
-                                dan mesin
-                                bertenaga.</p>
-                            <div
-                                class="text-sm text-slate-700 space-y-2 mb-6 bg-slate-50 p-3.5 rounded-2xl border border-slate-100">
-                                <p class="flex justify-between items-center"><span class="text-slate-500"><i
-                                            class="fa-solid fa-tag text-brand-red mr-2"></i> OTR Mulai</span> <strong
-                                        class="text-slate-900 font-bold">Rp 160.000.000</strong></p>
-                                <p class="flex justify-between items-center"><span class="text-slate-500"><i
-                                            class="fa-solid fa-coins text-brand-red mr-2"></i> DP Mulai</span> <strong
-                                        class="text-brand-red font-bold">5 Jutaan</strong></p>
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-brand-red bg-red-50 border border-red-100 px-3 py-1 rounded-full">Pick Up Niaga</span>
+                            <h3 class="text-2xl font-bold text-slate-900 mt-3 mb-2">Gran Max Pick Up</h3>
+                            <p class="text-xs text-slate-500 mb-6 leading-relaxed">Sahabat bisnis terpercaya, bak luas dan mesin bertenaga.</p>
+                            <div class="bg-slate-50 rounded-2xl p-4 text-sm text-slate-700 space-y-2 mb-6 border border-slate-100">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-500 text-xs flex items-center gap-1.5"><i class="fa-solid fa-tag text-brand-red"></i> OTR Mulai</span>
+                                    <strong class="text-slate-900 font-bold">Rp 160.000.000</strong>
+                                </div>
+                                <div class="flex justify-between items-center border-t border-slate-200/60 pt-2">
+                                    <span class="text-slate-500 text-xs flex items-center gap-1.5"><i class="fa-solid fa-coins text-amber-500"></i> DP Mulai</span>
+                                    <strong class="text-brand-red font-bold">5 Jutaan</strong>
+                                </div>
                             </div>
                         </div>
                         <a href="https://wa.me/628123456789?text=Halo%20Sales,%20saya%20tertarik%20dengan%20promo%20Gran%20Max%20Pick%20Up"
                             target="_blank"
-                            class="w-full bg-brand-red hover:bg-brand-red-dark text-white font-semibold py-3 rounded-xl text-center transition duration-300 flex items-center justify-center gap-2 shadow-md">
+                            class="w-full bg-slate-900 hover:bg-brand-red text-white font-bold py-3.5 rounded-xl text-center transition duration-300 flex items-center justify-center gap-2 shadow-sm">
                             <i class="fa-brands fa-whatsapp text-lg"></i> Minta Penawaran
                         </a>
                     </div>
@@ -763,34 +702,28 @@
     </section>
 
     <!-- DOWNLOAD E-BROSUR SECTION -->
-    <section id="brosur" class="py-16 md:py-20 bg-white scroll-mt-20">
+    <section id="brosur" class="py-16 md:py-24 bg-slate-100/70 scroll-mt-20">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div
-                class="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 rounded-3xl p-8 sm:p-12 text-white shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-8 border border-slate-700/60 relative overflow-hidden">
-                <!-- Background Accent Light -->
-                <div
-                    class="absolute -right-16 -bottom-16 w-64 h-64 bg-brand-red/20 rounded-full blur-3xl pointer-events-none">
-                </div>
+                class="bg-gradient-to-r from-brand-dark via-slate-900 to-slate-900 rounded-3xl p-8 sm:p-12 md:p-14 text-white shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-8 border border-slate-800 relative overflow-hidden">
+                <div class="absolute -top-20 -left-20 w-60 h-60 bg-brand-red/20 rounded-full blur-3xl pointer-events-none"></div>
 
-                <div class="space-y-3 max-w-xl text-center lg:text-left relative z-10">
-                    <span
-                        class="bg-brand-red/90 text-white text-xs font-bold px-3.5 py-1 rounded-full uppercase tracking-wider shadow-sm">Download
-                        Gratis</span>
-                    <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">Butuh Daftar Harga &
-                        Spesifikasi Lengkap?
-                    </h2>
-                    <p class="text-slate-300 text-sm sm:text-base font-normal leading-relaxed">Dapatkan berkas E-Brosur
-                        PDF resmi serta
-                        daftar
-                        pricelist OTR terbaru Daihatsu tahun 2026 langsung ke perangkat Anda.</p>
+                <div class="space-y-4 max-w-xl text-center lg:text-left relative z-10">
+                    <span class="bg-brand-red/20 text-red-400 border border-brand-red/30 text-xs font-bold px-3.5 py-1.5 rounded-full uppercase tracking-wider">
+                        Download Gratis
+                    </span>
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight">Butuh Daftar Harga & Spesifikasi Lengkap?</h2>
+                    <p class="text-slate-300 text-sm md:text-base leading-relaxed">
+                        Dapatkan berkas E-Brosur PDF resmi serta daftar pricelist OTR terbaru Daihatsu tahun 2026 langsung ke perangkat Anda.
+                    </p>
                 </div>
                 <div class="flex flex-col sm:flex-row gap-4 w-full lg:w-auto relative z-10">
                     <a href="assets/e-brosur-daihatsu-2026.pdf" download
-                        class="bg-brand-red hover:bg-brand-red-dark text-white font-semibold px-6 py-3.5 rounded-xl transition duration-300 text-center shadow-lg hover:shadow-glow flex items-center justify-center gap-2.5 text-sm sm:text-base transform hover:-translate-y-0.5">
-                        <i class="fa-solid fa-file-pdf text-xl"></i> E-Brosur
+                        class="bg-brand-red hover:bg-brand-red-dark text-white font-bold px-7 py-4 rounded-xl transition duration-300 text-center shadow-glow-red flex items-center justify-center gap-2.5 text-sm sm:text-base">
+                        <i class="fa-solid fa-file-pdf text-xl"></i> E-Brosur PDF
                     </a>
                     <a href="assets/pricelist-daihatsu-2026.pdf" download
-                        class="bg-white/10 hover:bg-white/20 text-white font-semibold px-6 py-3.5 rounded-xl transition duration-300 text-center border border-white/20 hover:border-white/40 backdrop-blur-sm flex items-center justify-center gap-2.5 text-sm sm:text-base transform hover:-translate-y-0.5">
+                        class="bg-slate-800 hover:bg-slate-700 text-white font-semibold px-7 py-4 rounded-xl transition duration-300 text-center border border-slate-700 flex items-center justify-center gap-2.5 text-sm sm:text-base">
                         <i class="fa-solid fa-download text-xl"></i> Pricelist OTR
                     </a>
                 </div>
@@ -799,41 +732,35 @@
     </section>
 
     <!-- TESTIMONI SECTION -->
-    <section id="testimoni" class="py-16 md:py-24 bg-slate-50 scroll-mt-20">
+    <section id="testimoni" class="py-16 md:py-24 bg-white scroll-mt-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-2xl mx-auto mb-12">
-                <span
-                    class="text-brand-red font-bold text-xs sm:text-sm uppercase tracking-widest bg-red-50 px-3.5 py-1 rounded-full border border-red-100">Bukti
-                    Nyata</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3">Kepuasan Pelanggan</h2>
-                <p class="text-slate-600 text-base mt-2">Dokumentasi penyerahan unit dan testimoni dari
-                    pembeli setia kami.</p>
+            <div class="text-center max-w-2xl mx-auto mb-12 md:mb-16">
+                <span class="text-brand-red font-bold text-xs sm:text-sm uppercase tracking-widest block mb-2">Testimoni Pembeli</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Kepuasan Pelanggan</h2>
+                <p class="text-slate-600 text-base mt-2">Dokumentasi penyerahan unit dan testimoni dari pembeli setia kami.</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
                 <!-- Testimoni Card 1 -->
                 <div
-                    class="bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-200/80 flex flex-col justify-between hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1">
-                    <div class="h-52 bg-slate-100 overflow-hidden relative group">
+                    class="bg-white rounded-3xl overflow-hidden shadow-card border border-slate-200/80 flex flex-col justify-between hover:shadow-card-hover hover:border-red-200 transition-all duration-300 group">
+                    <div class="h-52 sm:h-56 bg-slate-100 overflow-hidden relative">
                         <img src="assets/testimoni-1.jpg" alt="Foto Serah Terima Daihatsu Xenia"
                             class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
                             onerror="this.src='https://placehold.co/600x400/e1001a/ffffff?text=Foto+Serah+Terima+Xenia'">
                         <span
-                            class="absolute bottom-3 left-3 bg-slate-900/80 backdrop-blur-md text-white text-xs font-medium px-3 py-1 rounded-lg">
-                            <i class="fa-solid fa-camera text-brand-red mr-1.5"></i> Penyerahan Unit
+                            class="absolute bottom-3 left-3 bg-slate-900/80 backdrop-blur-md text-white text-[11px] font-semibold px-3 py-1 rounded-full border border-white/10">
+                            <i class="fa-solid fa-camera mr-1 text-brand-red"></i> Penyerahan Unit
                         </span>
                     </div>
-                    <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div class="p-7 flex-1 flex flex-col justify-between">
                         <div>
-                            <div class="flex text-amber-400 mb-3 text-sm gap-1">
+                            <div class="flex text-amber-400 mb-4 text-sm gap-1">
                                 <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
                                     class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
                                     class="fa-solid fa-star"></i>
                             </div>
-                            <p class="text-slate-600 text-sm italic leading-relaxed mb-6">"Pelayanan sales sangat ramah
-                                dan profesional.
-                                Berkas saya dijemput di rumah dan proses kredit Xenia cepat banget cuma 3 hari langsung
-                                STNK keluar!"</p>
+                            <p class="text-slate-600 text-sm leading-relaxed italic mb-6">"Pelayanan sales sangat ramah dan profesional. Berkas saya dijemput di rumah dan proses kredit Xenia cepat banget cuma 3 hari langsung STNK keluar!"</p>
                         </div>
                         <div class="flex items-center gap-3.5 pt-4 border-t border-slate-100">
                             <div
@@ -849,28 +776,24 @@
 
                 <!-- Testimoni Card 2 -->
                 <div
-                    class="bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-200/80 flex flex-col justify-between hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1">
-                    <div class="h-52 bg-slate-100 overflow-hidden relative group">
+                    class="bg-white rounded-3xl overflow-hidden shadow-card border border-slate-200/80 flex flex-col justify-between hover:shadow-card-hover hover:border-red-200 transition-all duration-300 group">
+                    <div class="h-52 sm:h-56 bg-slate-100 overflow-hidden relative">
                         <img src="assets/testimoni-2.jpg" alt="Foto Serah Terima Daihatsu Rocky"
                             class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
                             onerror="this.src='https://placehold.co/600x400/e1001a/ffffff?text=Foto+Serah+Terima+Rocky'">
                         <span
-                            class="absolute bottom-3 left-3 bg-slate-900/80 backdrop-blur-md text-white text-xs font-medium px-3 py-1 rounded-lg">
-                            <i class="fa-solid fa-camera text-brand-red mr-1.5"></i> Penyerahan Unit
+                            class="absolute bottom-3 left-3 bg-slate-900/80 backdrop-blur-md text-white text-[11px] font-semibold px-3 py-1 rounded-full border border-white/10">
+                            <i class="fa-solid fa-camera mr-1 text-brand-red"></i> Penyerahan Unit
                         </span>
                     </div>
-                    <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div class="p-7 flex-1 flex flex-col justify-between">
                         <div>
-                            <div class="flex text-amber-400 mb-3 text-sm gap-1">
+                            <div class="flex text-amber-400 mb-4 text-sm gap-1">
                                 <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
                                     class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
                                     class="fa-solid fa-star"></i>
                             </div>
-                            <p class="text-slate-600 text-sm italic leading-relaxed mb-6">"Dapet promo DP murah buat
-                                Rocky! Bonus kaca
-                                film dan karpet juga dikasih lengkap. Pokoknya mantap recommended banget buat yang mau
-                                beli
-                                Daihatsu."</p>
+                            <p class="text-slate-600 text-sm leading-relaxed italic mb-6">"Dapet promo DP murah buat Rocky! Bonus kaca film dan karpet juga dikasih lengkap. Pokoknya mantap recommended banget buat yang mau beli Daihatsu."</p>
                         </div>
                         <div class="flex items-center gap-3.5 pt-4 border-t border-slate-100">
                             <div
@@ -886,28 +809,24 @@
 
                 <!-- Testimoni Card 3 -->
                 <div
-                    class="bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-200/80 flex flex-col justify-between hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1 md:col-span-2 lg:col-span-1">
-                    <div class="h-52 bg-slate-100 overflow-hidden relative group">
+                    class="bg-white rounded-3xl overflow-hidden shadow-card border border-slate-200/80 flex flex-col justify-between hover:shadow-card-hover hover:border-red-200 transition-all duration-300 group md:col-span-2 lg:col-span-1">
+                    <div class="h-52 sm:h-56 bg-slate-100 overflow-hidden relative">
                         <img src="assets/testimoni-3.jpg" alt="Foto Serah Terima Gran Max PU"
                             class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
                             onerror="this.src='https://placehold.co/600x400/e1001a/ffffff?text=Foto+Serah+Terima+Granmax'">
                         <span
-                            class="absolute bottom-3 left-3 bg-slate-900/80 backdrop-blur-md text-white text-xs font-medium px-3 py-1 rounded-lg">
-                            <i class="fa-solid fa-camera text-brand-red mr-1.5"></i> Penyerahan Unit
+                            class="absolute bottom-3 left-3 bg-slate-900/80 backdrop-blur-md text-white text-[11px] font-semibold px-3 py-1 rounded-full border border-white/10">
+                            <i class="fa-solid fa-camera mr-1 text-brand-red"></i> Penyerahan Unit
                         </span>
                     </div>
-                    <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div class="p-7 flex-1 flex flex-col justify-between">
                         <div>
-                            <div class="flex text-amber-400 mb-3 text-sm gap-1">
+                            <div class="flex text-amber-400 mb-4 text-sm gap-1">
                                 <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
                                     class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
                                     class="fa-solid fa-star"></i>
                             </div>
-                            <p class="text-slate-600 text-sm italic leading-relaxed mb-6">"Tukar tambah mobil lama ke
-                                Gran Max PU
-                                prosesnya transparan, mobil ditawar harga lumayan tinggi dibanding tempat lain. Sukses
-                                terus buat
-                                Mas Sales!"</p>
+                            <p class="text-slate-600 text-sm leading-relaxed italic mb-6">"Tukar tambah mobil lama ke Gran Max PU prosesnya transparan, mobil ditawar harga lumayan tinggi dibanding tempat lain. Sukses terus buat Mas Sales!"</p>
                         </div>
                         <div class="flex items-center gap-3.5 pt-4 border-t border-slate-100">
                             <div
@@ -926,54 +845,45 @@
     </section>
 
     <!-- FOOTER -->
-    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-10">
+    <footer class="bg-brand-dark text-slate-400 py-16 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-12">
             <div>
-                <img src="assets/logo-daihatsu.png" alt="Daihatsu Sales Logo"
-                    class="h-10 w-auto mb-4 object-contain brightness-125"
+                <img src="assets/logo-daihatsu.png" alt="Daihatsu Sales Logo" class="h-10 w-auto mb-5 object-contain"
                     onerror="this.src='https://placehold.co/180x40/e1001a/ffffff?text=DAIHATSU.SALES'">
-                <p class="text-sm text-slate-400 leading-relaxed mb-4">
+                <p class="text-sm text-slate-400 leading-relaxed">
                     Sales Executive Resmi Dealer Daihatsu. Melayani pembelian cash & kredit wilayah Jabodetabek dan
-                    sekitarnya dengan pelayanan ramah dan profesional.
+                    sekitarnya dengan pelayanan ramah, cepat, dan profesional.
                 </p>
             </div>
             <div>
-                <h4 class="text-white font-bold mb-4 text-base">Kontak & Layanan</h4>
+                <h4 class="text-white font-bold mb-5 text-base tracking-wide">Kontak & Layanan</h4>
                 <ul class="space-y-3 text-sm">
-                    <li class="flex items-center"><i class="fa-solid fa-user text-brand-red w-6"></i> Sales Executive:
-                        <strong class="text-slate-200 ml-1">Nama Sales Anda</strong></li>
-                    <li class="flex items-center"><i class="fa-solid fa-phone text-brand-red w-6"></i> 0812-3456-789
-                    </li>
-                    <li class="flex items-center"><i class="fa-brands fa-whatsapp text-emerald-400 w-6"></i>
-                        0812-3456-789</li>
-                    <li class="flex items-center"><i class="fa-solid fa-envelope text-brand-accent w-6"></i>
-                        sales@daihatsu-promo.com</li>
+                    <li class="flex items-center gap-2.5"><i class="fa-solid fa-user text-brand-red w-4"></i> Sales Executive: <strong class="text-slate-200">Nama Sales Anda</strong></li>
+                    <li class="flex items-center gap-2.5"><i class="fa-solid fa-phone text-brand-red w-4"></i> 0812-3456-789</li>
+                    <li class="flex items-center gap-2.5"><i class="fa-brands fa-whatsapp text-emerald-400 w-4"></i> 0812-3456-789</li>
+                    <li class="flex items-center gap-2.5"><i class="fa-solid fa-envelope text-amber-400 w-4"></i> sales@daihatsu-promo.com</li>
                 </ul>
             </div>
             <div class="md:col-span-2 lg:col-span-1">
-                <h4 class="text-white font-bold mb-4 text-base">Lokasi Dealer</h4>
-                <p class="text-sm text-slate-400 leading-relaxed flex items-start">
-                    <i class="fa-solid fa-location-dot text-brand-red mt-1 mr-3 text-base"></i>
+                <h4 class="text-white font-bold mb-5 text-base tracking-wide">Lokasi Dealer</h4>
+                <p class="text-sm text-slate-400 leading-relaxed flex items-start gap-2.5">
+                    <i class="fa-solid fa-location-dot text-brand-red mt-1"></i>
                     <span>Jl. Raya Utama Dealer Daihatsu No. 123, Jakarta Pusat.</span>
                 </p>
             </div>
         </div>
         <div
-            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 border-t border-slate-800 text-center text-xs text-slate-500">
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 border-t border-slate-800/80 text-center text-xs text-slate-500">
             &copy; 2026 Sales Official Daihatsu. All rights reserved.
         </div>
     </footer>
 
     <!-- FLOATING WHATSAPP BUTTON -->
-    <div class="fixed bottom-6 right-6 z-50 group">
-        <span
-            class="absolute -inset-1 bg-emerald-500 rounded-full blur opacity-50 group-hover:opacity-100 transition animate-pulse"></span>
-        <a href="https://wa.me/628123456789?text=Halo%20Sales%20Daihatsu,%20saya%20ingin%20tanya%20promo%20terbaru"
-            target="_blank"
-            class="relative bg-emerald-500 hover:bg-emerald-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 transform hover:scale-110">
-            <i class="fa-brands fa-whatsapp text-3xl"></i>
-        </a>
-    </div>
+    <a href="https://wa.me/628123456789?text=Halo%20Sales%20Daihatsu,%20saya%20ingin%20tanya%20promo%20terbaru"
+        target="_blank"
+        class="fixed bottom-6 right-6 z-50 bg-emerald-500 hover:bg-emerald-600 text-white w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center shadow-glow-emerald transition-all duration-300 hover:scale-110 active:scale-95 group">
+        <i class="fa-brands fa-whatsapp text-3xl sm:text-4xl group-hover:rotate-12 transition transform"></i>
+    </a>
 
     <!-- JAVASCRIPT -->
     <script>
@@ -1042,11 +952,11 @@
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 filterBtns.forEach(b => {
-                    b.classList.remove('bg-brand-red', 'text-white', 'shadow-md');
-                    b.classList.add('bg-white', 'text-slate-600', 'shadow-sm');
+                    b.classList.remove('bg-brand-red', 'text-white', 'shadow-glow-red', 'font-bold');
+                    b.classList.add('bg-white', 'border', 'border-slate-200', 'text-slate-700', 'font-semibold');
                 });
-                btn.classList.remove('bg-white', 'text-slate-600', 'shadow-sm');
-                btn.classList.add('bg-brand-red', 'text-white', 'shadow-md');
+                btn.classList.remove('bg-white', 'border', 'border-slate-200', 'text-slate-700', 'font-semibold');
+                btn.classList.add('bg-brand-red', 'text-white', 'shadow-glow-red', 'font-bold');
 
                 const category = btn.getAttribute('data-category');
                 carCards.forEach(card => {
